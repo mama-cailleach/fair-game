@@ -6,7 +6,11 @@
 
 Our story begins with you, a very special wanderer, who had walked a long, long way from Glasgow. Your feet were tired, and the sun was setting in the sky like a giant, sleepy orange. You saw a pretty town ahead, all lit up with the last bit of sunshine, and knew it was Bo'ness, ready for its big Fair Day tomorrow!
 You didn't have a cozy bed for the night, but you found the biggest, most beautiful arch in town—the Queen's Arch! It was named after the kind Queen who had smiled at everyone that very day. "I'm sure she wouldn't mind if I snoozed here," you thought, snuggling into a secret spot where no one would see. You closed your eyes, not knowing your night was about to get a whole lot more exciting!
-A Secret in the Dark
+
+---
+
+## A Secret in the Dark
+
 But sleep didn't last long! In the quietest part of the night, when everyone else was dreaming, you heard something strange. A little clink and a whisper that tickled your ears. You peeked through a tiny crack in the arch, but it was too dark to see much. Still, your ears, which were extra good from all your travels, heard everything!
 "The real Queen is hidden away!" a grumpy voice growled. "She's safe in the big, old, locked room at the abandoned mansion!"
 Then, a slithery voice added, "Tomorrow, our pretend Queen will wear the crown! And then Bo'ness will be ours! Soon, the shadows from the south will creep in, and this happy town will be gone forever!"

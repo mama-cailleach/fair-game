@@ -19,16 +19,17 @@ o	Characters: The Flower Girls and the Witches of Bo'ness.
 •	
 Day 2 Task: Implement the dialogue system. Create the menu for the player to choose who to talk to. Write the dialogue for the Flower Girls and the Witches. Add the Wit roll logic. Make sure the game can transition from this scene to the next.
 
+
 Scene 3: The Haunted House & The Witches' Stone
-•	Goal: Find and rescue the real Queen. This is the main puzzle/action sequence.
-•	Gameplay: This scene is about overcoming two linked challenges.
-o	Challenge 1: The Ghostly Knight. The player arrives at Carriden House and finds the locked door guarded by a spectral knight. Instead of combat, the challenge is a multi-step Spirit check.
-o	Step 1: The player must successfully roll Spirit to perceive the invisible knight.
-o	Step 2: A second roll Spirit is needed to defeat the knight and claim its blade.
-o	
-o	Challenge 2: The Locked Door. The player uses the blade to unlock the door. This is an automatic success after the knight is defeated.
-o	Outcome: The real Queen is found and rescued, and they discover the flying brooms.
-Day 3 Task: Write the text for the Carriden House scene. Implement the Spirit skill checks. If the player fails, the game can simply say something like, "The knight's spectral form sends you sprawling. You need a moment to collect yourself." and then prompt them to try again, with some flavor text about the witches' wisdom helping them. This way, the player can't get permanently stuck.
+• Goal: Find and rescue the real Queen. This is the main puzzle/action sequence.
+• Gameplay: This scene is about overcoming three linked challenges:
+	o Challenge 1: The Maze. The player must navigate an ASCII maze (generated via https://www.asciiart.eu/ascii-maze-generator) inside Carriden House to find the locked room. The maze is displayed in the terminal, and the player moves using WASD or arrow keys.
+	o Challenge 2: The Ghostly Knight. After finding the room, the player encounters a spectral knight guarding the door. Instead of combat, the challenge is a multi-step Spirit check.
+		- Step 1: The player must successfully roll Spirit to perceive the invisible knight.
+		- Step 2: A second roll Spirit is needed to defeat the knight and claim its blade.
+	o Challenge 3: The Locked Door. The player uses the blade to unlock the door. This is an automatic success after the knight is defeated.
+	o Outcome: The real Queen is found and rescued, and they discover the flying brooms.
+Day 3 Task: Write the text for the Carriden House scene. Implement the maze navigation and Spirit skill checks. If the player fails the Spirit check, the game can simply say something like, "The knight's spectral form sends you sprawling. You need a moment to collect yourself." and then prompt them to try again, with some flavor text about the witches' wisdom helping them. This way, the player can't get permanently stuck.
 
 
 Scene 4: The Final Confrontation
