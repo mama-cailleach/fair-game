@@ -12,6 +12,12 @@
 
 ---
 
+## Utility Module Refactor (26/08/2025)
+
+- Created `screens/utils.py` to hold shared utility functions and classes.
+- Moved `load_art` (for loading ASCII art) and `ArrowMenu` (for menu navigation) into `utils.py` for easy reuse across all screens.
+- Updated `screens/char_choice_scene.py` to import these utilities from `utils.py`.
+
 All major planning documents are in place. Next steps: begin coding the CLI framework and first scene.
 
 ## Game Structure & Features Expanded (25/08/2025)
