@@ -13,20 +13,14 @@ class Chapter2ChoiceScene(UITemplateScene):
         menu = ArrowMenu(["Observe who's passing", "Start Walking through the parade"])
         import msvcrt
         art_file_map = {
-            "Observe who's passing": "chapter2_choice1.txt",
-            "Start Walking through the parade": "chapter2_choice2.txt"
+            "Observe who's passing": "2people.txt",
+            "Start Walking through the parade": "walking.txt"
         }
         while True:
-            selected = menu.get_selected()
+            selected_option = menu.get_selected()
             # Use placeholder art for now
-            art = (
-                "   .--.\n"
-                "  /    \\\n"
-                " |      |\n"
-                "  \\    /\n"
-                "   '--'\n"
-                " (Placeholder Art)\n"
-            )
+            art_file = art_file_map.get(selected_option, None)
+            art = load_art(art_file)
             art_lines = art.split('\n')
             art_pad_top = max(0, (main_h - len(art_lines)) // 2)
             main_box = []
@@ -140,14 +134,7 @@ class Chapter2ChoiceScene(UITemplateScene):
         side_w = 20
         text_h = 6
         # Placeholder art for now
-        art = (
-            "   .--.\n"
-            "  /    \\\n"
-            " |      |\n"
-            "  \\    /\n"
-            "   '--'\n"
-            " (Placeholder Art)\n"
-        )
+        art = load_art("darkfae1.txt")
         art_lines = art.split('\n')
         art_pad_top = max(0, (main_h - len(art_lines)) // 2)
         main_box = []

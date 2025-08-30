@@ -9,15 +9,21 @@ class OutroScene(UITemplateScene):
         # Lines from chapter6.md (one per line, as in the file)
         lines = [
             "The cheers that filled the air then were the loudest, happiest cheers ever!",
-            "Not just for the Fair Day, but for their Queen, for their freedom, and for you, the brave hero who saved them!",
+            "Not just for the Fair Day, but for their Queen, for their freedom,", 
+            "and for you, the brave hero who saved them!",
             "The true Queen was crowned with lots of claps and happy tears.",
             "The 'Festal Day' song was sung even louder, full of joy and victory!",
+            "As the big parade went to Dougie Park for more fun, you were with your new witch friends.",
+            "All of you smiling and laughing. You, the wanderer, the secret witch, the unexpected hero.",
+            "Partying with them, no longer an outsider, but a special part of Bo'ness's happy story.",
             "",
-            "As the big parade went to Dougie Park for more fun, you were with your new witch friends, all of you smiling and laughing.",
-            "You, the wanderer, the secret witch, the unexpected hero, partied with them, no longer an outsider, but a special part of Bo'ness's happy story.",
-            "The air was filled with music, laughter, and the promise of many more happy Fair Days, all thanks to your courage and cleverness!",
+            "The air was filled with music, laughter,", 
+            "and the promise of many more Fair Days to come,",
+            "all thanks to your courage and cleverness!",
             "",
-            "THE END"
+            "",
+            "THE END",
+            ""
         ]
         idx = 0
         # Placeholder for art files to cycle through (add your images here)

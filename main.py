@@ -1,5 +1,6 @@
 
 from screens.title_screen import TitleScreen
+from screens.title_screen_2 import TitleScreen2
 from screens.art_test_scene import ArtTestScene
 from screens.intro_scene_ui import IntroSceneUI
 from screens.char_choice_scene import CharChoiceScene
@@ -10,7 +11,13 @@ from screens.chapter2_choice_scene import Chapter2ChoiceScene
 from screens.chapter2_witches_scene import Chapter2WitchesScene
 from screens.chapter3_scene import Chapter3Scene
 from screens.chapter4_scene import Chapter4Scene
+from screens.chapter4_poststone_scene import Chapter4PostStoneScene
+from screens.chapter4_knightbattle_scene import Chapter4KnightBattleScene
+from screens.chapter4_postbattle_scene import Chapter4PostBattleScene
+from screens.chapter5_broom_scene import Chapter5BroomScene
 from screens.chapter5_scene import Chapter5Scene
+from screens.chapter5_fight_scene import Chapter5FightScene
+from screens.chapter5_postfight_scene import Chapter5PostFightScene
 from screens.outro_scene import OutroScene
 from sound_manager import SoundManager
 
@@ -19,6 +26,9 @@ def main():
     # Start background music
     # SoundManager.get().play_music('assets/audio/ourfestal.mp3', loop=True)
     
+    screen = TitleScreen2()
+    screen.show()
+
     # Start with the title screen
     screen = TitleScreen()
     screen.show()
@@ -26,7 +36,7 @@ def main():
     # Art test scene (for testing ASCII art display)
     scene = ArtTestScene()
     scene.show()
-
+ 
     # Intro Scene UI
     scene = IntroSceneUI()
     scene.show()
@@ -55,19 +65,42 @@ def main():
     scene = Chapter3Scene(player)
     scene.show()   
 
-    '''
     # Chapter 4 Scene (pass player object)
     scene = Chapter4Scene(player)
+    scene.show()
+
+    # Chapter 4 Post Stone Scene (pass player object)
+    scene = Chapter4PostStoneScene(player)
+    scene.show()
+
+    # Chapter 4 Knight Battle Scene (pass player object)
+    scene = Chapter4KnightBattleScene(player)
+    scene.show()
+
+    # Chapter 4 Post Battle Scene (pass player object)
+    scene = Chapter4PostBattleScene(player)
+    scene.show()
+
+    # Chapter 5 Broom Scene (pass player object)
+    scene = Chapter5BroomScene(player)
     scene.show()
 
     # Chapter 5 Scene (pass player object)
     scene = Chapter5Scene(player)
     scene.show()
 
+    # Chapter 5 Fight Scene (pass player object)
+    scene = Chapter5FightScene(player)
+    scene.show()
+
+    # Chapter 5 Post Fight Scene (pass player object)
+    scene = Chapter5PostFightScene(player)
+    scene.show()
+
+
     # Outro Scene (pass player object)
     scene = OutroScene(player)
     scene.show()
-    '''
 
     # End screen
     screen = EndScreen()

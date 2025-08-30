@@ -1,8 +1,3 @@
-from .base_screen import BaseScreen
-
-class ArtTestScene(BaseScreen):
-    def show(self):
-        art = '''
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠋⠁⠄⠉⠉⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠙⢿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣄⣀⡀⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢸⣿⣿⣿⣿⣿
@@ -29,10 +24,4 @@ class ArtTestScene(BaseScreen):
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠄⠄⠄⢸⣿⣿⠃⠄⠄⠄⠛⠻⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣤⣤⣤⣤⣿⣿⣦⣤⣤⣤⣤⣤⣼⣿⣿
 
-“The morn's the Fair and I'll be there and I'll hae up ma curly hair.”
 
-You are a wanderer who has just arrived 
-in Bo'ness on the night of the FAIR 'EEN.
-        '''
-        self.draw_frame(art)
-        self.wait_for_key()

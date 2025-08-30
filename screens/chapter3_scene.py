@@ -20,9 +20,7 @@ class Chapter3Scene(UITemplateScene):
         idx = 0
         art_files = [
             'map1.txt',
-            'chapter3_2.txt',
-            'chapter3_3.txt',
-            'chapter3_4.txt',
+            'castle3.txt'
         ]
         main_w = 70
         main_h = 22
@@ -77,7 +75,7 @@ class Chapter3Scene(UITemplateScene):
         menu = ArrowMenu(["Yes", "No "])
         while True:
             # Draw the choice UI
-            art = load_art(art_files[-1])
+            art = load_art("castle3.txt")
             art_lines = art.split('\n')
             main_box = []
             main_box.append('┌' + '─' * main_w + '┐' + ' ' + '┌' + '─' * side_w + '┐')
@@ -131,15 +129,23 @@ class Chapter3Scene(UITemplateScene):
         if choice == "No ":
             # Show ghost/stone dialogue, then proceed to next scene
             ghost_lines = [
-                "A sudden, cold WHOOSH made you jump! You saw a sparkly, see-through shape—a ghostly knight!",
-                "You ran and ran and ran until you tripped over a big, mossy rock.",
-                "You looked down. It was a tall, jagged stone, half-hidden by plants.",
+                "",
+                "A sudden, cold WHOOSH made you jump!",
+                 "You saw a sparkly, see-through shape—a ghostly knight!",
+                 "",
+                 "",
+                "You ran and ran and ran until you tripped over.",
+                "You looked down. It was a low, wide, smooth, mossy stone, hidden in undergrowth.",
                 "This was the Witches' Stone!"
             ]
             idx = 0
+            art_files = [
+            'person1.txt',
+            'forrest1.txt'
+            ]
             while idx < len(ghost_lines):
                 text_lines = ghost_lines[idx:idx+4]
-                art_file = art_files[-1]
+                art_file = art_files[(idx // 4) % len(art_files)]
                 art = load_art(art_file)
                 art_lines = art.split('\n')
                 main_box = []
@@ -196,7 +202,7 @@ class Chapter3Scene(UITemplateScene):
                 idx = 0
                 while idx < len(success_lines):
                     text_lines = success_lines[idx:idx+4]
-                    art_file = art_files[-1]
+                    art_file = "castle6.txt"
                     art = load_art(art_file)
                     art_lines = art.split('\n')
                     main_box = []
@@ -249,17 +255,22 @@ class Chapter3Scene(UITemplateScene):
                     "A sudden, cold WHOOSH made you jump! You saw a sparkly, see-through shape—a ghostly knight!",
                     "It was guarding the door! It pushed you away!",
                     "and you quickly scrambled out of the house, your heart doing a wild dance in your chest.",
-                    "You ran and ran until you tripped over a big, mossy rock.",
-                    "You looked down. It was a tall, jagged stone, half-hidden by plants.",
+                    "You ran and ran and ran until you tripped over.",
+                    "You looked down. It was a low, wide, smooth, mossy stone, hidden in undergrowth.",
                     "",
                     "",
                     "This was the Witches' Stone!"
                     "",
                 ]
                 idx = 0
+                art_files = [
+                'person1.txt',
+                'forrest1.txt',
+                'forrest2.txt'
+                ]
                 while idx < len(fail_lines):
                     text_lines = fail_lines[idx:idx+4]
-                    art_file = art_files[-1]
+                    art_file = art_files[(idx // 4) % len(art_files)]
                     art = load_art(art_file)
                     art_lines = art.split('\n')
                     main_box = []

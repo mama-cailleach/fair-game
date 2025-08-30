@@ -18,10 +18,10 @@ class Chapter1Scene(UITemplateScene):
             "you hear a strange sound and a whisper that tickles your ears.",
             "You peek through a tiny crack in the arch,",
             "but it's too dark to see anything...",
-            "This is your first skill check wanderer!",
-            "You will toss your lucky coin for a bonus to combine with your skill.",
-            "Press ENTER when ready for the toss, and then the story will continue...",
             "",
+            "The air crackles with power as a whisper from the unseen speaks to you.",
+            "It is time to test one of your skills, wanderer.",
+            "Focus your thoughts, press ENTER and let your path be revealed...",
             "[SKILL_CHECK]",
             "",
             "",
@@ -36,10 +36,11 @@ class Chapter1Scene(UITemplateScene):
         idx = 0
         # Placeholder for art files to cycle through
         art_files = [
-            'chapter1.txt',
             'castle2.txt',
-            'char_idle2.txt',
-            "queen1.txt"
+            'nightcastle.txt',
+            'char_knee2.txt',
+            "3nightpeeps.txt",
+            "face2.txt"
         ]
         main_w = 70
         main_h = 22

@@ -27,10 +27,10 @@ class Chapter2DialoguesScene(UITemplateScene):
         ]
         idx = 0
         art_files = [
-            'chapter2_1.txt',
-            'chapter2_2.txt',
-            'chapter2_3.txt',
-            'chapter2_4.txt',
+            'walking2.txt',
+            '3girls1.txt',
+            'girls1.txt',
+            'witches3.txt',
         ]
         main_w = 70
         main_h = 22
@@ -82,13 +82,44 @@ class Chapter2DialoguesScene(UITemplateScene):
         # After intro, show menu for who to talk to
         from .utils import ArrowMenu
         import msvcrt
+        # Art file mapping for menu and handlers
+        art_file_map = {
+            "Flower Girls": "3girls1.txt",
+            "Faeries": "girls1.txt",
+            "Witches": "witches3.txt"
+        }
         while True:
             if self.player.char_class == "The Explorer":
                 menu = ArrowMenu(["Flower Girls", "Witches"])
             else:
                 menu = ArrowMenu(["Flower Girls", "Faeries", "Witches"])
             while True:
-                # Draw menu UI
+                selected_option = menu.get_selected()
+                art_file = art_file_map.get(selected_option, 'chapter2_1.txt')
+                art = load_art(art_file)
+                art_lines = art.split('\n')
+                # Build main art/side box
+                main_box = []
+                main_box.append('┌' + '─' * main_w + '┐' + ' ' + '┌' + '─' * side_w + '┐')
+                art_pad_top = max(0, (main_h - len(art_lines)) // 2)
+                for i in range(main_h):
+                    if art_pad_top <= i < art_pad_top + len(art_lines):
+                        art_line = art_lines[i - art_pad_top].center(main_w)
+                    else:
+                        art_line = ' ' * main_w
+                    if i == 2:
+                        side_line = self.player.char_class.center(side_w)
+                    elif i == 5:
+                        side_line = self.player.attr_labels[0].center(side_w)
+                    elif i == 6:
+                        side_line = self.player.attr_labels[1].center(side_w)
+                    elif i == 7:
+                        side_line = self.player.attr_labels[2].center(side_w)
+                    else:
+                        side_line = ' ' * side_w
+                    main_box.append('│' + art_line + '│' + ' ' + '│' + side_line + '│')
+                main_box.append('└' + '─' * main_w + '┘' + ' ' + '└' + '─' * side_w + '┘')
+                # Build text box
                 menu_lines = menu.get_display(main_w + side_w + 3)
                 text_box = []
                 text_box.append('┌' + '─' * (main_w + side_w + 3) + '┐')
@@ -101,7 +132,7 @@ class Chapter2DialoguesScene(UITemplateScene):
                         line = ' ' * (main_w + side_w + 3)
                     text_box.append('│' + line + '│')
                 text_box.append('└' + '─' * (main_w + side_w + 3) + '┘')
-                # Draw main art/side box as before (reuse last art)
+                # Draw everything
                 content = '\n'.join(main_box + text_box)
                 self.draw_frame(content)
                 key = msvcrt.getch()
@@ -113,17 +144,17 @@ class Chapter2DialoguesScene(UITemplateScene):
                         menu.move_up()
                     elif arrow == b'P':
                         menu.move_down()
-            # Branch to handler for each choice
+            # Branch to handler for each choice, passing art file
             choice = menu.get_selected()
             if choice == "Flower Girls":
-                self.handle_flower_girls()
+                self.handle_flower_girls(art_file=art_file_map["Flower Girls"])
             elif choice == "Faeries":
-                self.handle_faeries()
+                self.handle_faeries(art_file=art_file_map["Faeries"])
             elif choice == "Witches":
-                self.handle_witches()
+                self.handle_witches(art_file="darkfae1.txt")
                 return  # End scene after witches
 
-    def handle_flower_girls(self):
+    def handle_flower_girls(self, art_file=None):
         from .utils import ArrowMenu
         import msvcrt
         import random
@@ -136,7 +167,7 @@ class Chapter2DialoguesScene(UITemplateScene):
         while True:
             # Draw menu
             menu_lines = menu_flowers.get_display(70 + 20 + 3)
-            self.show_dialogue_box(["The Flower Girls giggle and look at you curiously."] + menu_lines)
+            self.show_dialogue_box(["The Flower Girls giggle and look at you curiously."] + menu_lines, art_file="3girls2.txt")
             key = msvcrt.getch()
             if key in (b'\r', b'\n'):
                 choice = menu_flowers.get_selected()
@@ -155,7 +186,7 @@ class Chapter2DialoguesScene(UITemplateScene):
                             " - I heard her dress wasn't even the right shade of Fair Day blue!",
                         ]
                     ]
-                    self.show_dialogue_box(random.choice(responses))
+                    self.show_dialogue_box(random.choice(responses), art_file=art_file)
                     self.wait_for_key("")
                 elif choice == "'Hi it's my first day here, I was travelling over night'":
                     responses = [
@@ -172,7 +203,7 @@ class Chapter2DialoguesScene(UITemplateScene):
                             " - There's going to be a big dance and a special present for the Queen.",
                         ]
                     ]
-                    self.show_dialogue_box(random.choice(responses))
+                    self.show_dialogue_box(random.choice(responses), art_file=art_file)
                     self.wait_for_key("")
                 elif choice == "'Where are you going to?'":
                     responses = [
@@ -189,7 +220,7 @@ class Chapter2DialoguesScene(UITemplateScene):
                             " - And a big parade and celebration to the park!",
                         ]
                     ]
-                    self.show_dialogue_box(random.choice(responses))
+                    self.show_dialogue_box(random.choice(responses), art_file=art_file)
                     self.wait_for_key("")
                 elif choice == "Talk to someone else":
                     return  # Go back to main menu
@@ -200,7 +231,7 @@ class Chapter2DialoguesScene(UITemplateScene):
                 elif arrow == b'P':
                     menu_flowers.move_down()
 
-    def handle_faeries(self):
+    def handle_faeries(self, art_file=None):
         from .utils import ArrowMenu
         import msvcrt
         import random
@@ -212,7 +243,7 @@ class Chapter2DialoguesScene(UITemplateScene):
             ])
         while True:
             menu_lines = menu_faeries.get_display(70 + 20 + 3)
-            self.show_dialogue_box(["The faeries hover nearby, their wings shimmering."] + menu_lines)
+            self.show_dialogue_box(["The faeries hover nearby, their wings shimmering."] + menu_lines, art_file="girls2.txt")
             key = msvcrt.getch()
             if key in (b'\r', b'\n'):
                 choice = menu_faeries.get_selected()
@@ -231,7 +262,7 @@ class Chapter2DialoguesScene(UITemplateScene):
                             " - The magic here feels… off. It's not right.",
                         ]
                     ]
-                    self.show_dialogue_box(random.choice(responses))
+                    self.show_dialogue_box(random.choice(responses), art_file=art_file)
                     self.wait_for_key("")
                 elif choice == "'What was that with the Champion all about?'":
                     responses = [
@@ -248,7 +279,7 @@ class Chapter2DialoguesScene(UITemplateScene):
                             " - He is being too serious for a day of such joy.",
                         ]
                     ]
-                    self.show_dialogue_box(random.choice(responses))
+                    self.show_dialogue_box(random.choice(responses), art_file=art_file)
                     self.wait_for_key("")
                 elif choice == "'How much time is there until the crowning?'":
                     responses = [
@@ -265,7 +296,7 @@ class Chapter2DialoguesScene(UITemplateScene):
                             " - Not long until the crown get's it's place on her head.",
                         ]
                     ]
-                    self.show_dialogue_box(random.choice(responses))
+                    self.show_dialogue_box(random.choice(responses), art_file=art_file)
                     self.wait_for_key("")
                 elif choice == "Talk to someone else":
                     return  # Go back to main menu
@@ -276,14 +307,14 @@ class Chapter2DialoguesScene(UITemplateScene):
                 elif arrow == b'P':
                     menu_faeries.move_down()
 
-    def handle_witches(self):
+    def handle_witches(self, art_file=None):
         # Framework for Witches dialogue/choices
         self.show_dialogue_box([
             "You tiptoed through the bustling fair, listening carefully. ",
             "Flower girls giggling. ",
             "Friendly faeries flying. ",
             "Every step made you realize there wasn't much time left!",
-        ])
+        ], art_file=art_file)
         self.wait_for_key("")
 
     def show_dialogue_box(self, lines, art_file=None):

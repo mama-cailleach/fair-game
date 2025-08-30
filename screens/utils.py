@@ -1,5 +1,13 @@
 import random
 import time
+import sys
+import os
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
 
 # Skill check system: coin toss + stat, with animation and outcome
 def run_skill_check(player, attribute, scene, main_w=70, main_h=22, side_w=20):
@@ -10,14 +18,32 @@ def run_skill_check(player, attribute, scene, main_w=70, main_h=22, side_w=20):
         "   .......   ",
         "   ...........   "
     ]
+    art_frames = [
+    "char_idle3.txt",
+    "char_idle4.txt",
+    "char_idle5.txt",
+    "char_idle4.txt",
+    "char_idle3.txt",
+    "char_idle4.txt",
+    "char_idle5.txt",
+    "char_idle4.txt",
+    "char_idle3.txt"
+    ]
     # Show animation in the main box
     for i in range(8):
-        frame = frames[i % len(frames)]
+        #frame = frames[i % len(frames)]
+        # Cycle through art frames
+        art_file = art_frames[i % len(art_frames)]
+        art = load_art(art_file)
+        art_lines = art.split('\n')
+        art_pad_top = max(0, (main_h - len(art_lines)) // 2)
         main_box = []
         main_box.append('┌' + '─' * main_w + '┐' + ' ' + '┌' + '─' * side_w + '┐')
         for j in range(main_h):
-            if j == main_h // 2:
-                art_line = frame.center(main_w)
+            if art_pad_top <= j < art_pad_top + len(art_lines):
+                art_line = art_lines[j - art_pad_top].center(main_w)
+            #if j == main_h // 2:
+            #    art_line = frame.center(main_w)
             else:
                 art_line = ' ' * main_w
             # Side box: show player class and attributes
@@ -46,7 +72,7 @@ def run_skill_check(player, attribute, scene, main_w=70, main_h=22, side_w=20):
             text_box.append('│' + line + '│')
         text_box.append('└' + '─' * (main_w + side_w + 3) + '┘')
         scene.draw_frame('\n'.join(main_box + text_box))
-        time.sleep(0.12)
+        time.sleep(0.08)
     # Coin toss: 0 or 1
     coin = random.choice([0, 1])
     stat = player.stats[attribute]
@@ -111,7 +137,8 @@ def run_skill_check(player, attribute, scene, main_w=70, main_h=22, side_w=20):
 import os
 
 def load_art(filename):
-    art_path = os.path.join('assets', 'art', filename)
+    # Use resource_path to find the file in both dev and PyInstaller .exe
+    art_path = resource_path(os.path.join('assets', 'art', filename))
     if not os.path.exists(art_path):
         return '[Art not found]'
     with open(art_path, encoding='utf-8') as f:

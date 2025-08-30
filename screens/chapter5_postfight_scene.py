@@ -1,45 +1,43 @@
 from .ui_template_scene import UITemplateScene
-from .utils import load_art, ArrowMenu, run_skill_check
-import msvcrt
+from .utils import load_art, run_skill_check
 
-class Chapter3MazeScene(UITemplateScene):
+class Chapter5PostFightScene(UITemplateScene):
     def __init__(self, player):
         self.player = player
 
     def show(self):
+        # Lines from chapter5.md (one per line, as in the file)
         lines = [
-            #Lines for after the mini game
-            "Deep inside the spooky house, you find a giant, heavy door.",
-            "Then, you heard a tiny, muffled sound from inside.",
-            "A soft cry, like someone was tied up. It had to be the real Queen!",
-            "Your wiggling and giggling had woken something else!",
-            "A sudden, cold WHOOSH made you jump! You saw a sparkly, see-through shape—a ghostly knight!",
-            "It was guarding the door! It pushed you away!",
-            "and you quickly scrambled out of the house, your heart doing a wild dance in your chest.",
-            "You ran and ran until you tripped over a big, mossy rock.",
+            "Two fights broke out! The true Queen, surprisingly speedy, bravely fought the imposter.",
+            "And you, with your clever witchy magic, were too much for the big Champion!",
+            "Both bad guys were quickly defeated! Just then, the Witches of Bo'ness,",
+            "who had been dancing nearby, did a special spell.",
+            "Swirly magic surrounded the pretend Queen, and poof!",
+            "Her disguise faded, showing she was really the mean Princess of Linlithgow!",
+            "With their sneaky plan ruined, the Princess and the Champion",
+            "scrambled away, running into the crowd and disappearing.",
             "",
-            "You looked down. It was a tall, jagged stone, half-hidden by plants.",
-            "This was the Witches' Stone!",
-            ""
+            "The real Queen watched them go, her eyes steady.",
+            "'Let them run. They'll try again, but they'll never, ever take our town!'"
         ]
         idx = 0
+        # Placeholder for art files to cycle through (add your images here)
         art_files = [
-            'maze1.txt',
-            'chapter3_2.txt',
-            'chapter3_3.txt',
-            'chapter3_4.txt',
+            'chapter5_1.txt',
+            'chapter5_2.txt',
+            'chapter5_3.txt',
+            'chapter5_4.txt',
         ]
         main_w = 70
         main_h = 22
         side_w = 20
         text_h = 6
-
-        # Show intro lines as usual
         while idx < len(lines):
             text_lines = lines[idx:idx+4]
             art_file = art_files[(idx // 4) % len(art_files)]
             art = load_art(art_file)
             art_lines = art.split('\n')
+            # Main rectangle with ASCII art centered vertically
             main_box = []
             main_box.append('┌' + '─' * main_w + '┐' + ' ' + '┌' + '─' * side_w + '┐')
             art_pad_top = max(0, (main_h - len(art_lines)) // 2)
@@ -48,6 +46,7 @@ class Chapter3MazeScene(UITemplateScene):
                     art_line = art_lines[i - art_pad_top].center(main_w)
                 else:
                     art_line = ' ' * main_w
+                # Side box: show player class and attributes
                 if i == 2:
                     side_line = self.player.char_class.center(side_w)
                 elif i == 5:
@@ -77,3 +76,4 @@ class Chapter3MazeScene(UITemplateScene):
             self.draw_frame(content)
             self.wait_for_key("")
             idx += 4
+        # After all lines, return to allow next scene

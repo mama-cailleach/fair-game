@@ -1,50 +1,53 @@
-
 from .ui_template_scene import UITemplateScene
-from .utils import load_art
+from .utils import load_art, run_skill_check
 
-class IntroSceneUI(UITemplateScene):
+class Chapter5BroomScene(UITemplateScene):
+    def __init__(self, player):
+        self.player = player
+
     def show(self):
-        # The intro story lines
+        # Lines from chapter5.md (one per line, as in the file)
         lines = [
-            "",
-            "The air is thick with anticipation, and the streets are alive", 
-            "with the sounds of the Kinneil Band marching through town.",
-            "",
-            "You follow with the crowd, laughter and joy fill the air as you see marvelous arches.",
-            "They stop to play for the Queen elect, as she smiles the warmest smile towards you.",
-            "",
-            "It all seems awfy braw, but something doesn't feel right...",
-            "Strange things are afoot, and your adventure is about to begin!"
+        "BROOM SCENE"
         ]
         idx = 0
-        # List of art files to cycle through for each page
+        # Placeholder for art files to cycle through (add your images here)
         art_files = [
-            'walking3.txt',
-            'queen1.txt',
-            'walking4.txt'
+            'chapter5_1.txt',
+            'chapter5_2.txt',
+            'chapter5_3.txt',
+            'chapter5_4.txt',
         ]
+        main_w = 70
+        main_h = 22
+        side_w = 20
+        text_h = 6
         while idx < len(lines):
-            # Show up to 3 lines at a time
-            text_lines = lines[idx:idx+3]
-            # Pick art file for this page (cycle if fewer arts than pages)
-            art_file = art_files[(idx // 3) % len(art_files)]
+            text_lines = lines[idx:idx+4]
+            art_file = art_files[(idx // 4) % len(art_files)]
             art = load_art(art_file)
             art_lines = art.split('\n')
-            # Use the same dimensions as UITemplateScene
-            main_w = 70
-            main_h = 22
-            side_w = 20
-            text_h = 6
             # Main rectangle with ASCII art centered vertically
             main_box = []
             main_box.append('┌' + '─' * main_w + '┐' + ' ' + '┌' + '─' * side_w + '┐')
             art_pad_top = max(0, (main_h - len(art_lines)) // 2)
             for i in range(main_h):
                 if art_pad_top <= i < art_pad_top + len(art_lines):
-                    line = art_lines[i - art_pad_top].center(main_w)
+                    art_line = art_lines[i - art_pad_top].center(main_w)
                 else:
-                    line = ' ' * main_w
-                main_box.append('│' + line + '│' + ' ' + '│' + ' ' * side_w + '│')
+                    art_line = ' ' * main_w
+                # Side box: show player class and attributes
+                if i == 2:
+                    side_line = self.player.char_class.center(side_w)
+                elif i == 5:
+                    side_line = self.player.attr_labels[0].center(side_w)
+                elif i == 6:
+                    side_line = self.player.attr_labels[1].center(side_w)
+                elif i == 7:
+                    side_line = self.player.attr_labels[2].center(side_w)
+                else:
+                    side_line = ' ' * side_w
+                main_box.append('│' + art_line + '│' + ' ' + '│' + side_line + '│')
             main_box.append('└' + '─' * main_w + '┘' + ' ' + '└' + '─' * side_w + '┘')
             # Text box
             text_box = []
@@ -55,7 +58,6 @@ class IntroSceneUI(UITemplateScene):
                 else:
                     line = ' ' * (main_w + side_w + 3)
                 if j == text_h - 1:
-                    # Place '> Next' at the bottom right, with one space before the border
                     next_str = "> Next"
                     line = line[:-len(next_str)-1] + next_str + ' '
                 text_box.append('│' + line + '│')
@@ -63,5 +65,5 @@ class IntroSceneUI(UITemplateScene):
             content = '\n'.join(main_box + text_box)
             self.draw_frame(content)
             self.wait_for_key("")
-            idx += 3
+            idx += 4
         # After all lines, return to allow next scene

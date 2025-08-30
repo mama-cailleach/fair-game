@@ -1,7 +1,42 @@
 # Weans Game Jam 2025 - Progress Tracker
 
+# Battle System & Buff Logic Improvements (30/08/2025)
+# Dynamic Art & Animation Improvements (30/08/2025)
 
-## Major Scene & Dialogue System Updates (29/08/2025)
+- Added support for cycling between multiple ASCII art images as animation frames in skill checks and other scenes, allowing for dynamic, whimsical visual effects.
+- Post-ritual spell selection scene now displays the correct ASCII art for each spell when selected, using a direct mapping from spell name to art file.
+- All UI frames (including skill checks and dialogue) can now display any ASCII art from the assets/art folder, with easy switching between static and animated art.
+- Improved documentation and code comments to clarify how to use art files for both static and animated displays in all scenes.
+- Asset loading and resource_path logic confirmed to work for both development and PyInstaller builds.
+
+- Analyze Weakness buff now applies to the next attack of any type (class action or spell), not just Tackle. The bonus is automatically added to the next damage calculation and then reset.
+- All player attack and spell effects now display in the normal text box area, preserving the main art and side menu UI.
+- Added a helper to render battle effect text in the standard UI, replacing the old show_dialogue_box method for a more consistent experience.
+- Fixed spell persistence and ensured spell menu always reflects the player's learned spells from Chapter 4.
+- Improved code clarity and modularity for future extensibility.
+
+# Major Scene & System Additions (28-30/08/2025)
+
+- Created new modular scenes for Chapter 4 and Chapter 5, including:
+	- Ritual, post-ritual, knight battle, post-battle, broom, and post-fight scenes.
+	- Each scene uses the shared UI template for consistent art, side menu, and text box layout.
+- Implemented a robust, modular fight system for Chapter 5:
+	- Player can choose between class actions and spells, with branching menus.
+	- Champion AI includes Tackle, Heal, and Smug actions, with stateful buffs and debuffs.
+	- All battle logic is now modular and easy to extend for new actions or effects.
+- Improved spell system:
+	- Spells are now assigned to the player object after the Chapter 4 ritual and persist through to the fight scene.
+	- Spell menu in battle always reflects the player's learned spells.
+	- Each spell has unique effects (damage, stun, etc.) and is handled in the main battle loop.
+- All scenes and battles now use the ArrowMenu for interactive choices, with menu state preserved across loops.
+- UI improvements:
+	- All effect and action text appears in the normal text box area, never breaking the main art or side menu.
+	- HP for both player and Champion is always visible in the side menu during battle.
+	- Modular draw_battle_ui helper ensures consistent rendering of effects and state.
+
+
+
+## Major Scene & Dialogue System Updates (28/08/2025)
 
 - Implemented interactive branching dialogue menus for Flower Girls and Faeries in Chapter 2, using ArrowMenu and random dialogue sets.
 - Added class-based branching: Seer gets unique dialogue, Explorer/Investigator get menu-driven choices.

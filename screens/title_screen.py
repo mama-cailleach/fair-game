@@ -2,7 +2,7 @@ from .base_screen import BaseScreen
 
 class TitleScreen(BaseScreen):
     def show(self):
-        logo = """
+        logo = """  
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣈⣿⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠒⣂⡢⠐⣧⣶⠒⠠⠀⠀⠠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -30,6 +30,14 @@ class TitleScreen(BaseScreen):
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⠀⠈⠐⠙⠘⢄⢰⢲⢠⡀⣄⢠⣠⠀⠔⡀⢨⠃⠕⠘⠀⠠⠐⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠄⠀⠀⣀⡁⠉⠈⢈⣀⠈⠀⠠⠀⠂⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                                                   
+Go North, Go South, 
+Go East, Go West
+No Town Has Got Our Measures
+Our Fair It Stands Abune Them All
+A Day The We All Treasure
+It is, after all
+SIMPLY THE BEST!
+
         """
         self.draw_frame(logo)
-        self.wait_for_key("Press Enter to Start")
+        self.wait_for_key()

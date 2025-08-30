@@ -28,10 +28,10 @@ class Chapter2WitchesScene(UITemplateScene):
         idx = 0
         # Placeholder for art files to cycle through (add your images here)
         art_files = [
-            'chapter2_1.txt',
-            'chapter2_2.txt',
-            'chapter2_3.txt',
-            'chapter2_4.txt',
+            'witches3.txt',
+            'witches1.txt',
+            'witches2.txt',
+            'witches4.txt',
         ]
         main_w = 70  
         main_h = 22

@@ -8,78 +8,35 @@ class Chapter4Scene(UITemplateScene):
     def show(self):
         # Lines from chapter4.md (one per line, as in the file)
         lines = [
+            "",
             "You caught your breath and thought hard.",
             "You couldn't fight a ghost by yourself, but you knew some very wise helpers!",
-            "",
-            "[CHECK_SPIRIT_FOR_RITUAL] (choose ritual?)",
-            "",
-            "You performed your little ritual.",
-            "Swirly smoke floated up, and the air felt tingly.",
-            "Slowly, five shimmering figures appeared:",
-            "Margaret Pringle, Bessie Vickar, Annaple Thomsone, and two friends both named Margaret Hamilton!",
-            "They were the ancient witches of Bo'ness, here to help!",
-            "",
-            "(maybe add some dialogue choices)",
-            "",
-            '"The ghost knight is sad and lonely," whispered Margaret Pringle.',
-            '"To beat him, you need his shiny sword. It\'s special, and it will open the door!"',
-            'Bessie Vickar added, "And inside that room, beyond the knight, are our magical flying brooms!"',
-            '"They\'ve been waiting for a hero like you to carry you back to the coronation!"',
-            "",
-            "# The Queen's Great Escape",
-            "",
-            "Feeling brave, you went back to the spooky Carriden House.",
-            "GO IN",
-            "MAZE",
-            "IF ALREADY DONE THE MAZE PATH WILL BE MARKED",
-            "",
-            "You found the ghostly knight, and this time, you were ready!",
-            "You used your own clever magic and what the ancient witches taught you.",
-            "*choices all of them are good, maybe dialogue choices from above can inform the ritual....*",
-            "(Maybe you made a bright light, or tickled his arm until he dropped his sword!)",
-            "*depending on choice a different outcome, but they are all successful*",
-            "However you did it, you bravely faced the knight, and its sparkly form faded away.",
-            "You picked up its ancient blade.",
-            "",
-            "The sword felt warm and buzzy in your hand.",
-            "You touched it to the big, locked door, and click! The door swung open!",
-            "Inside, tied up but safe, was the real Queen!",
-            "",
-            "Her eyes, a little tired but full of thanks, sparkled at you.",
-            '"Thank you, thank you!" she whispered.',
-            '"We must hurry! Linlithgow is trying to take over the crown,',
-            'they want to steal Bo\'ness and destroy our town!"',
-            "",
-            "(look for brooms/a way to escape)",
-            "",
-            "You spotted some beautiful, shiny brooms in the corner.",
-            '"Look!" you said, a big smile on your face.',
-            '"They\'re waiting for us!" With the Queen holding on tight,',
-            'you both jumped on a broom and zoomed into the sky!'
+            "All you need is to do a ritual for the witches.",
+            "[CHECK_SOUL_FOR_RITUAL]",
         ]
         idx = 0
         # Placeholder for art files to cycle through (add your images here)
         art_files = [
-            'chapter4_1.txt',
-            'chapter4_2.txt',
-            'chapter4_3.txt',
-            'chapter4_4.txt',
+            'witches5.txt',
+            'witches6.txt',
         ]
         main_w = 70
         main_h = 22
         side_w = 20
         text_h = 6
         while idx < len(lines):
-            # Check for spirit skill check placeholder
-            if '[CHECK_SPIRIT_FOR_RITUAL]' in lines[idx:idx+4]:
-                # Run skill check for Spirit
-                outcome_num = run_skill_check(self.player, 'Spirit', self, main_w, main_h, side_w)
-                # Placeholder: you can map outcome_num to dialogue later
+            # Check for soul skill check placeholder
+            if '[CHECK_SOUL_FOR_RITUAL]' in lines[idx:idx+4]:
+                # Run skill check for Soul
+                outcome_num = run_skill_check(self.player, 'Soul', self, main_w, main_h, side_w)
+                # Store the outcome in the player object for later use
+                self.player.soul_ritual_outcome = outcome_num
+                # Show ritual outcome
                 text_lines = [
-                    "You feel the ancient magic swirl around you...",
-                    "The ritual is complete!",
-                    "(Outcome: {} - add branching here)".format(outcome_num),
-                    ""
+                    "",
+                    "You performed your wee ritual.",
+                    "Swirly smoke floated up, and the air felt tingly.",
+                    "Slowly, five shimmering figures appeared:"
                 ]
                 art_file = art_files[(idx // 4) % len(art_files)]
                 art = load_art(art_file)
@@ -119,9 +76,12 @@ class Chapter4Scene(UITemplateScene):
                 content = '\n'.join(main_box + text_box)
                 self.draw_frame(content)
                 self.wait_for_key("")
-                idx += 4
-                continue
-            # Normal page rendering
+                # Transition to the next scene (chapter4_postritual_scene)
+                from .chapter4_postritual_scene import Chapter4PostRitualScene
+                next_scene = Chapter4PostRitualScene(self.player)
+                next_scene.show()
+                return
+            # Normal page rendering (should not be reached in this minimal scene)
             text_lines = lines[idx:idx+4]
             art_file = art_files[(idx // 4) % len(art_files)]
             art = load_art(art_file)
