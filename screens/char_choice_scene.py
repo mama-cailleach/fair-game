@@ -1,3 +1,14 @@
+
+# Player class to store character choice and stats
+class Player:
+    def __init__(self, char_class, attr_labels, stats):
+        self.char_class = char_class  # e.g. "The Investigator"
+        self.attr_labels = attr_labels  # list of 3 strings for side box
+        self.stats = stats  # dict: {"Mind": int, "Soul": int, "Body": int}
+
+    def __repr__(self):
+        return f"<Player {self.char_class}: {self.stats}>"
+
 from .ui_template_scene import UITemplateScene
 from .utils import load_art, ArrowMenu
 
@@ -8,37 +19,45 @@ class CharChoiceScene(UITemplateScene):
         side_w = 20
         text_h = 6
         menu = ArrowMenu(["The Investigator", "The Explorer", "The Seer"])
-        # Attribute displays for each character
-        attr = {
+        attr_labels = {
             "The Investigator": [
-                "----[ MIND ]----",
-                "---[ SOUL ]---",
-                "--[ BODY ]--"
+                "----[MIND]----",
+                "---[SOUL]---",
+                "--[BODY]--"
             ],
             "The Explorer": [
-                "---[ MIND ]---",
-                "--[ SOUL ]--",
-                "----[ BODY ]----"
+                "---[MIND]---",
+                "--[SOUL]--",
+                "----[BODY]----"
             ],
             "The Seer": [
-                "--[ MIND ]--",
-                "----[ SOUL ]----",
-                "---[ BODY ]---"
+                "--[MIND]--",
+                "----[SOUL]----",
+                "---[BODY]---"
             ]
         }
+        attr_stats = {
+            "The Investigator": {"Mind": 3, "Soul": 2, "Body": 1},
+            "The Explorer": {"Mind": 2, "Soul": 1, "Body": 3},
+            "The Seer": {"Mind": 1, "Soul": 3, "Body": 2}
+        }
         import msvcrt
+        main_w = 70
+        main_h = 22
+        side_w = 20
+        text_h = 6
+        art_file_map = {
+            "The Investigator": "char_idle2_investigator.txt",
+            "The Explorer": "char_idle2_explorer.txt",
+            "The Seer": "char_idle2_seer.txt"
+        }
         while True:
-            # Load art for the selected character
-            art_file_map = {
-                "The Investigator": "char_idle2_investigator.txt",
-                "The Explorer": "char_idle2_explorer.txt",
-                "The Seer": "char_idle2_seer.txt"
-            }
             art = load_art(art_file_map[menu.get_selected()])
             art_lines = art.split('\n')
             art_pad_top = max(0, (main_h - len(art_lines)) // 2)
             main_box = []
             main_box.append('┌' + '─' * main_w + '┐' + ' ' + '┌' + '─' * side_w + '┐')
+            selected = menu.get_selected()
             for i in range(main_h):
                 if art_pad_top <= i < art_pad_top + len(art_lines):
                     art_line = art_lines[i - art_pad_top].ljust(main_w)
@@ -46,13 +65,13 @@ class CharChoiceScene(UITemplateScene):
                     art_line = ' ' * main_w
                 # Side box: name at top, then attributes
                 if i == 2:
-                    side_line = menu.get_selected().center(side_w)
+                    side_line = selected.center(side_w)
                 elif i == 5:
-                    side_line = attr[menu.get_selected()][0].center(side_w)
+                    side_line = attr_labels[selected][0].center(side_w)
                 elif i == 6:
-                    side_line = attr[menu.get_selected()][1].center(side_w)
+                    side_line = attr_labels[selected][1].center(side_w)
                 elif i == 7:
-                    side_line = attr[menu.get_selected()][2].center(side_w)
+                    side_line = attr_labels[selected][2].center(side_w)
                 else:
                     side_line = ' ' * side_w
                 main_box.append('│' + art_line + '│' + ' ' + '│' + side_line + '│')
@@ -84,4 +103,6 @@ class CharChoiceScene(UITemplateScene):
                     menu.move_up()
                 elif arrow == b'P':
                     menu.move_down()
-        # After selection, you can return menu.get_selected() or store the choice
+        # After selection, return a Player object with the chosen class, labels, and stats
+        selected = menu.get_selected()
+        return Player(selected, attr_labels[selected], attr_stats[selected])

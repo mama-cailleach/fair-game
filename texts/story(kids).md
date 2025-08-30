@@ -19,16 +19,24 @@ Oh dear! Your heart went thump-thump-thump! A pretend Queen? And a whole town in
 
 --- 
 
-## The Pretend Queen's Parade
+## The Fair Days's Parade
 
 When morning came, the town was wide awake and super excited! The happy sound of bagpipes filled the air, like a giant, musical yawn. From your secret spot, you watched as the Fair Day started. Laughter and yummy smells of fresh bread floated all around.
 And then, there she was: the Queen! But you knew it wasn't the real Queen. It was the pretend Queen! She smiled and waved, but her eyes looked a bit cold, and her smile didn't quite reach them. Nobody else seemed to notice, because they were all so excited for the fair. But you saw the tiny differences, like spotting a sneaky fox in a field of sheep.
 You looked at the people walking with her. Was it the shiny Champion? Or maybe the people carrying the scepter and crown? You knew someone important was helping the bad guys. You stayed hidden, letting the happy noise wash over you. The fair was full of bright arches and joyful music, and everyone was heading to the Town Hall for the crowning. You knew you had to do something, and fast!
-Meeting the Witches
+
+---
+
+## Meeting the Witches
 You decided to find out more. You tiptoed through the bustling fair, listening carefully. You chatted with flower girls, who giggled that the Queen had been a bit grumpy that morning. You talked to other friendly townspeople who told you all about the Fair Day's old traditions. Every chat made you realize there wasn't much time left!
 Then, you saw a group of wonderful women getting ready for a special performance. They were the Witches of Bo'ness, known for their magical dances and clever songs! You felt a special tingle, a feeling you knew well, because you were a witch too! You had actually come to Bo'ness to find a secret, old place called the Witches' Stone.
 As you chatted with the friendly witches, you all became fast friends. One kind witch, who was a special friend to the real Queen, leaned in and whispered, "The Queen seemed... different today, not herself at all." This was your chance! You leaned in too, and whispered, "Don't trust the Champion!" Her eyes grew wide! She quickly handed you an old, crinkly map. "This will lead you to the Witches' Stone, dear friend. Be careful!" she said.
-The Spooky House and the Magic Stone
+
+
+---
+
+
+## The Spooky House and the Magic Stone
 You thanked her and quickly looked at the map. Next to the Witches' Stone, you saw another name: Carriden House. A shiver ran down your spine. This was it! This was why you were truly meant to be in Bo'ness!
 You hurried away from the noisy fair, following the map down a twisty, old path. Soon, you saw a big, abandoned mansion, all dark windows and broken bits, like a sleeping monster made of stone. You found a way inside, but it was so dusty and cluttered with old things, it was hard to move!
 Deep inside the spooky house, you found a giant, heavy door. It was locked tight! You pushed and pulled, but it wouldn't budge. Then, you heard a tiny, muffled sound from inside—a soft cry, like someone was tied up. It had to be the real Queen!

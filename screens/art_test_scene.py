@@ -25,6 +25,8 @@ class ArtTestScene(BaseScreen):
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣀⣀⣈⣻⣿⣀⣀⣀⣀⣙⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 
+You are a wanderer who has just arrived 
+in Bo'ness on the night of the FAIR E'EN.
         '''
         self.draw_frame(art)
         self.wait_for_key()
