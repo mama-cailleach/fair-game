@@ -9,9 +9,10 @@ class EndScreen(BaseScreen):
             "Created for Weans Game Jam: Summer 2025\n\n"
             "by mama\n"
             "mama666.itch.io\n\n"
-            "Thanks cler for testing, inspiration and support!\n\n\n"
+            "Thanks so much Cler for:\n" 
+            "testing, inspiration and support! <3 S2\n\n\n"
             "Whit's fur ye'll no go by ye!"
-            "\n\n\n\n\n\n\n\n"
+            "\n\n\n\n\n\n\n\n\n"
             "Press ENTER to play again or ESC to exit."
         )
         self.draw_frame(credits)

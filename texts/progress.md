@@ -1,22 +1,36 @@
-# Major UI, Art, and Game Loop Improvements (31/08/2025)
-
-- Added robust support for dynamic effect art in battle scenes:
-	- Player actions, spells, and champion moves now display unique ASCII art for both menu selection and effect resolution.
-	- Art file mappings (`action_art_map`, `spell_art_map`, `action_effect_art_map`, `spell_effect_art_map`, `champion_effect_art_map`) are now fully customizable and decoupled from asset filenames, allowing any art file to be used for any effect.
-	- `draw_battle_ui` now always uses the correct art file for both menu and effect phases.
-- Improved error handling and documentation for art loading:
-	- If an art file is missing, a placeholder is shown, and all art lookups are now explicit and easy to update.
-- End screen logic refactored:
-	- Pressing ENTER restarts the game (returns to main loop), ESC cleanly exits.
-	- End screen is now fully modular and does not call main() directly, preventing recursion issues.
-- Main game loop (`main.py`) now wraps the entire game sequence in a `while True` loop:
-	- Returning from the end screen restarts the game from the title.
-	- ESC from the end screen exits the program.
-- All changes are modular, child-friendly, and maintain the whimsical, magical tone.
-
 # Weans Game Jam 2025 - Progress Tracker
 
-# Battle System, Buff Logic Improvements, Dynamic Art & Animation Improvements (30/08/2025)
+---
+
+## Major UI, Art, Sound, and Game Loop Improvements (31/08/2025)
+
+- **Dynamic Soundtrack Integration:**
+    - Background music now plays from the start of the main loop using `SoundManager`.
+    - Music changes contextually before key scenes (e.g., Kinneil, Journey Home, Our Chosen, Best Day).
+    - Music is stopped and swapped cleanly between scenes to prevent overlap, ensuring a polished experience.
+    - End screen and replay logic now properly reset or stop music as needed.
+
+- **Battle System & Art:**
+    - Player actions, spells, and champion moves display unique ASCII art for both menu selection and effect resolution.
+    - Art file mappings (`action_art_map`, `spell_art_map`, `action_effect_art_map`, `spell_effect_art_map`, `champion_effect_art_map`) are fully customizable and decoupled from asset filenames.
+    - `draw_battle_ui` always uses the correct art file for both menu and effect phases.
+    - All effect and action text appears in the normal text box area, preserving the main art and side menu UI.
+
+- **Game Loop & End Screen:**
+    - Main game loop (`main.py`) is wrapped in a `while True` so the game can be replayed from the title screen after the end screen.
+    - End screen is modular: ENTER restarts the game (returns to main loop), ESC exits. No direct calls to main() from screens.
+    - Music is stopped and restarted as needed to prevent overlap between playthroughs.
+
+- **General Improvements:**
+    - Improved error handling and documentation for art loading: missing art files show a placeholder, and all art lookups are explicit and easy to update.
+    - All scenes and battles use the ArrowMenu for interactive choices, with menu state preserved across loops.
+    - HP for both player and Champion is always visible in the side menu during battle.
+    - Modular `draw_battle_ui` helper ensures consistent rendering of effects and state.
+    - All code, dialogue, and content remain suitable for children, with a whimsical, magical, and friendly tone.
+
+---
+
+## Battle System, Buff Logic Improvements, Dynamic Art & Animation Improvements (30/08/2025)
 
 - Added support for cycling between multiple ASCII art images as animation frames in skill checks and other scenes, allowing for dynamic, whimsical visual effects.
 - Post-ritual spell selection scene now displays the correct ASCII art for each spell when selected, using a direct mapping from spell name to art file.
@@ -32,7 +46,7 @@
 
 ---
 
-# Major Scene & System Additions (28-30/08/2025)
+## Major Scene & System Additions (28-30/08/2025)
 
 - Created new modular scenes for Chapter 4 and Chapter 5, including:
 	- Ritual, post-ritual, knight battle, post-battle, broom, and post-fight scenes.
@@ -117,5 +131,19 @@ All major planning documents are in place. Next steps: begin coding the CLI fram
 	- Key stats: Wit, Perception, Spirit.
 	- Story and scenes broken down into chapters for easy development.
 
+
+---
+
+
+## Things I Wish I Had Time For / Features Cut Due to Time
+
+- **Better art and animations:** More detailed ASCII art, animated transitions, and alternate images for different outcomes.
+- **Minigames:** 
+    - Unlocking the arches (lock-picking or puzzle minigame).
+    - Maze navigation inside Carriden House.
+    - Flying home on the broom as a skill-based or timing minigame.
+- **Better UI for fights:** More RPG-like interface, with clearer turn order, effects, and maybe a visual HP bar.
+- **More dialogue choices and branches:** Deeper branching, more character interactions, and class-specific outcomes.
+- **More sound design:** Additional SFX, more music tracks, and better planning/mixing for a richer audio experience.
 
 ---

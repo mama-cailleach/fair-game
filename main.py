@@ -1,4 +1,5 @@
-
+import os
+from screens.utils import resource_path
 from screens.title_screen import TitleScreen
 from screens.title_screen_2 import TitleScreen2
 from screens.art_test_scene import ArtTestScene
@@ -22,11 +23,24 @@ from sound_manager import SoundManager
 
 
 def main():
-    # Start background music
-    # SoundManager.get().play_music('assets/audio/ourfestal.mp3', loop=True)
+
     
     while True:
 
+        # Stop any music that might still be playing (e.g., from credits/end screen)
+        if SoundManager.get().is_music_playing():
+            SoundManager.get().stop_music()
+
+
+        festal_path = resource_path(os.path.join('assets', 'audio', 'ourfestal.mp3'))
+        kinneil_path = resource_path(os.path.join('assets', 'audio', 'kinneil.mp3'))
+        journeyhome_path = resource_path(os.path.join('assets', 'audio', 'journeyhome.mp3'))
+        ourchosen_path = resource_path(os.path.join('assets', 'audio', 'ourchosen.mp3'))
+        bestday_path = resource_path(os.path.join('assets', 'audio', 'bestday.mp3'))
+
+        # Our Festal Day
+
+        SoundManager.get().play_music(festal_path, loop=True)
         screen = TitleScreen2()
         screen.show()
 
@@ -50,6 +64,8 @@ def main():
         scene = Chapter1Scene(player)
         scene.show()    
 
+        SoundManager.stop_music(festal_path)
+        SoundManager.get().play_music(kinneil_path, loop=True)
         # Chapter 2 Scene (pass player object)
         scene = Chapter2Scene(player)
         scene.show()
@@ -66,6 +82,8 @@ def main():
         scene = Chapter3Scene(player)
         scene.show()   
 
+        SoundManager.stop_music(kinneil_path)
+        SoundManager.get().play_music(journeyhome_path, loop=True)
         # Chapter 4 Scene (pass player object)
         scene = Chapter4Scene(player)
         scene.show()
@@ -82,6 +100,8 @@ def main():
         scene = Chapter4PostBattleScene(player)
         scene.show()
 
+        SoundManager.stop_music(journeyhome_path)
+        SoundManager.get().play_music(ourchosen_path, loop=True)
         # Chapter 5 Scene (pass player object)
         scene = Chapter5Scene(player)
         scene.show()
@@ -94,7 +114,8 @@ def main():
         scene = Chapter5PostFightScene(player)
         scene.show()
 
-
+        SoundManager.stop_music(ourchosen_path)
+        SoundManager.get().play_music(bestday_path, loop=True)
         # Outro Scene (pass player object)
         scene = OutroScene(player)
         scene.show()

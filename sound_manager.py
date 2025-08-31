@@ -35,3 +35,7 @@ class SoundManager:
 
     def is_playing(self):
         return pygame.mixer.music.get_busy()
+    
+    # In sound_manager.py
+    def is_music_playing(self):
+        return self._music_playing
