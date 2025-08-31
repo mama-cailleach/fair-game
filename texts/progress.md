@@ -1,3 +1,19 @@
+# Major UI, Art, and Game Loop Improvements (31/08/2025)
+
+- Added robust support for dynamic effect art in battle scenes:
+	- Player actions, spells, and champion moves now display unique ASCII art for both menu selection and effect resolution.
+	- Art file mappings (`action_art_map`, `spell_art_map`, `action_effect_art_map`, `spell_effect_art_map`, `champion_effect_art_map`) are now fully customizable and decoupled from asset filenames, allowing any art file to be used for any effect.
+	- `draw_battle_ui` now always uses the correct art file for both menu and effect phases.
+- Improved error handling and documentation for art loading:
+	- If an art file is missing, a placeholder is shown, and all art lookups are now explicit and easy to update.
+- End screen logic refactored:
+	- Pressing ENTER restarts the game (returns to main loop), ESC cleanly exits.
+	- End screen is now fully modular and does not call main() directly, preventing recursion issues.
+- Main game loop (`main.py`) now wraps the entire game sequence in a `while True` loop:
+	- Returning from the end screen restarts the game from the title.
+	- ESC from the end screen exits the program.
+- All changes are modular, child-friendly, and maintain the whimsical, magical tone.
+
 # Weans Game Jam 2025 - Progress Tracker
 
 # Battle System, Buff Logic Improvements, Dynamic Art & Animation Improvements (30/08/2025)
