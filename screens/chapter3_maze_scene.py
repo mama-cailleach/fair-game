@@ -13,10 +13,14 @@ class Chapter3MazeScene(UITemplateScene):
             "Then, you heard a tiny, muffled sound from inside.",
             "A soft cry, like someone was tied up. It had to be the real Queen!",
             "Your wiggling and giggling had woken something else!",
-            "A sudden, cold WHOOSH made you jump! You saw a sparkly, see-through shape—a ghostly knight!",
+            "",
+            "A sudden, cold WHOOSH made you jump!", 
+            "You saw a sparkly, see-through shape—a ghostly knight!",
             "It was guarding the door! It pushed you away!",
-            "and you quickly scrambled out of the house, your heart doing a wild dance in your chest.",
+            "",
+            "You quickly scrambled out of the house, your heart doing a wild dance in your chest.",
             "You ran and ran until you tripped over a big, mossy rock.",
+            "",
             "",
             "You looked down. It was a tall, jagged stone, half-hidden by plants.",
             "This was the Witches' Stone!",
@@ -24,10 +28,10 @@ class Chapter3MazeScene(UITemplateScene):
         ]
         idx = 0
         art_files = [
-            'maze1.txt',
-            'chapter3_2.txt',
-            'chapter3_3.txt',
-            'chapter3_4.txt',
+            'door2.txt',
+            'person1.txt',
+            'forrest1.txt',
+            'forrest2.txt'
         ]
         main_w = 70
         main_h = 22

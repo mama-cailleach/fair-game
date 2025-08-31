@@ -8,21 +8,29 @@ class Chapter4PostBattleScene(UITemplateScene):
     def show(self):
         # Lines from chapter5.md (one per line, as in the file)
         lines = [
+        "",
         "However you did it, you bravely faced the knight." ,
         "And its sparkly form faded away.",
-        "You picked up its ancient blade.",
         "",
+        "",
+        "You picked up its ancient blade.",
         "The sword felt warm and buzzy in your hand.",
+        "",
+        "",
         "You touched it to the big, locked door, and click! The door swung open!",
         "Inside, tied up but safe, was the real Queen!",
         "",
+        "",
         "Her eyes, a little tired but full of thanks, sparkled at you.",
         "'Thank you, thank you!' she whispered.",
+        "",
+        "",
         "'We must hurry! Linlithgow is trying to take over the crown,",
         "'they want to steal Bo'ness and destroy our town!'",
+        "",
         "You spotted some beautiful, shiny brooms in the corner.",
         "'Look!' you said, a big smile on your face.",
-        "'They're waiting for us!' With the Queen holding on tight,",
+        "'They're waiting for us!'",
         "> USE BROOM CHARM <",
         "",
         "Just like the witches taught you, you used the broom charm.",
@@ -32,10 +40,13 @@ class Chapter4PostBattleScene(UITemplateScene):
         idx = 0
         # Placeholder for art files to cycle through (add your images here)
         art_files = [
-            'chapter5_1.txt',
-            'chapter5_2.txt',
-            'chapter5_3.txt',
-            'chapter5_4.txt',
+            'knight3.txt',
+            'sword1.txt',
+            'door3.txt',
+            'queen4.txt',
+            'queen5.txt',
+            'broom1.txt',
+            'broom2.txt'
         ]
         main_w = 70
         main_h = 22

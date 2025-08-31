@@ -1,7 +1,6 @@
 # Weans Game Jam 2025 - Progress Tracker
 
-# Battle System & Buff Logic Improvements (30/08/2025)
-# Dynamic Art & Animation Improvements (30/08/2025)
+# Battle System, Buff Logic Improvements, Dynamic Art & Animation Improvements (30/08/2025)
 
 - Added support for cycling between multiple ASCII art images as animation frames in skill checks and other scenes, allowing for dynamic, whimsical visual effects.
 - Post-ritual spell selection scene now displays the correct ASCII art for each spell when selected, using a direct mapping from spell name to art file.
@@ -14,6 +13,8 @@
 - Added a helper to render battle effect text in the standard UI, replacing the old show_dialogue_box method for a more consistent experience.
 - Fixed spell persistence and ensured spell menu always reflects the player's learned spells from Chapter 4.
 - Improved code clarity and modularity for future extensibility.
+
+---
 
 # Major Scene & System Additions (28-30/08/2025)
 
@@ -34,7 +35,7 @@
 	- HP for both player and Champion is always visible in the side menu during battle.
 	- Modular draw_battle_ui helper ensures consistent rendering of effects and state.
 
-
+---
 
 ## Major Scene & Dialogue System Updates (28/08/2025)
 

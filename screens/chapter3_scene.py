@@ -75,7 +75,7 @@ class Chapter3Scene(UITemplateScene):
         menu = ArrowMenu(["Yes", "No "])
         while True:
             # Draw the choice UI
-            art = load_art("castle3.txt")
+            art = load_art("castle6.txt")
             art_lines = art.split('\n')
             main_box = []
             main_box.append('┌' + '─' * main_w + '┐' + ' ' + '┌' + '─' * side_w + '┐')
@@ -202,7 +202,7 @@ class Chapter3Scene(UITemplateScene):
                 idx = 0
                 while idx < len(success_lines):
                     text_lines = success_lines[idx:idx+4]
-                    art_file = "castle6.txt"
+                    art_file = "door5.txt"
                     art = load_art(art_file)
                     art_lines = art.split('\n')
                     main_box = []
@@ -249,12 +249,16 @@ class Chapter3Scene(UITemplateScene):
             else:
                 # Failure: show failure dialogue, then proceed to next scene
                 fail_lines = [
+                    "",
                     "You tried to get inside, but the door was locked tight!",
                     "You pushed and pulled, but it wouldn't budge.",
+                    "",
+                    "",
                     "Your wiggling and giggling had woken something else!",
-                    "A sudden, cold WHOOSH made you jump! You saw a sparkly, see-through shape—a ghostly knight!",
+                    "A sudden, cold WHOOSH made you jump!", 
+                    "You saw a sparkly, see-through shape—a ghostly knight!",
                     "It was guarding the door! It pushed you away!",
-                    "and you quickly scrambled out of the house, your heart doing a wild dance in your chest.",
+                    "You quickly scrambled out of the house, your heart doing a wild dance in your chest.",
                     "You ran and ran and ran until you tripped over.",
                     "You looked down. It was a low, wide, smooth, mossy stone, hidden in undergrowth.",
                     "",
@@ -264,6 +268,7 @@ class Chapter3Scene(UITemplateScene):
                 ]
                 idx = 0
                 art_files = [
+                'door5.txt',
                 'person1.txt',
                 'forrest1.txt',
                 'forrest2.txt'

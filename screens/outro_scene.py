@@ -12,7 +12,7 @@ class OutroScene(UITemplateScene):
             "Not just for the Fair Day, but for their Queen, for their freedom,", 
             "and for you, the brave hero who saved them!",
             "The true Queen was crowned with lots of claps and happy tears.",
-            "The 'Festal Day' song was sung even louder, full of joy and victory!",
+            "Songs were sung even louder, full of joy and victory!",
             "As the big parade went to Dougie Park for more fun, you were with your new witch friends.",
             "All of you smiling and laughing. You, the wanderer, the secret witch, the unexpected hero.",
             "Partying with them, no longer an outsider, but a special part of Bo'ness's happy story.",
@@ -28,10 +28,10 @@ class OutroScene(UITemplateScene):
         idx = 0
         # Placeholder for art files to cycle through (add your images here)
         art_files = [
-            'outro1.txt',
-            'outro2.txt',
-            'outro3.txt',
-            'outro4.txt',
+            'crowning2.txt',
+            'crowning3.txt',
+            'boness1.txt',
+            'theend.txt'
         ]
         main_w = 70
         main_h = 22

@@ -3,13 +3,13 @@ from .utils import load_art, ArrowMenu
 import msvcrt
 
 class Chapter5FightScene(UITemplateScene):
-    def draw_battle_ui(self, main_lines, text_lines, plyr_hp, champ_hp):
+    def draw_battle_ui(self, main_lines, text_lines, plyr_hp, champ_hp, art_file=None):
         # Draws the main art/side box and puts text_lines in the normal text box area
         main_w = 70
         main_h = 22
         side_w = 20
         text_h = 6
-        art = load_art("battle_placeholder.txt")
+        art = load_art(art_file or "battle_placeholder.txt")
         art_lines = art.split('\n')
         art_pad_top = max(0, (main_h - len(art_lines)) // 2)
         main_box = []
@@ -55,6 +55,45 @@ class Chapter5FightScene(UITemplateScene):
         self.player = player
 
     def show(self):
+        action_art_map = {
+            "Analyze Weakness": "char_action_analyze.txt",
+            "Spirit Shield": "char_action_shield.txt",
+            "Acrobatic Leap": "char_action_acrobatic.txt",
+            "Tackle": "char_action_tackle.txt",
+            "Premonition": "char_action_premonition.txt"
+        }
+        spell_art_map = {
+            "Broom Charm": "char_magic_broom.txt",
+            "Feather Spell": "char_magic_feather.txt",
+            "Tickle Spell": "char_magic_tickle.txt",
+            "Black Cat": "char_magic_cat.txt",
+            "Liar Liar": "char_magic_liar.txt",
+            "Liars Liars": "char_magic_liars.txt"
+        }
+        action_effect_art_map = {
+            "Analyze Weakness": "char_idle3.txt",
+            "Spirit Shield": "char_magic2.txt",
+            "Acrobatic Leap": "char_idle5.txt",
+            "Tackle": "char_tackle.txt",
+            "Premonition": "char_magic_3.txt"
+        }
+        spell_effect_art_map = {
+            "Broom Charm": "broom1.txt",
+            "Feather Spell": "champion_tickle.txt",
+            "Tickle Spell": "champion_tickle.txt",
+            "Black Cat": "cat2.txt",
+            "Liar Liar": "fire1.txt",
+            "Liars Liars": "fire2.txt"
+        }
+        champion_effect_art_map = {
+            "Tackle": "champion_tackle.txt",
+            "Heal": "champion_heal.txt", 
+            "Smug": "champion_smug.txt", 
+            "Feather Stun": "champion_tickle2.txt",
+            "Tickle Stun": "champion_tickle2.txt",
+            "Faint": "char_knee2.txt",          
+            "Defeat": "champion_defeat.txt",        
+        }
         # Initial HP
         champion_hp = 10
         player_hp = 10 + self.player.stats.get("Body", 0)
@@ -114,14 +153,20 @@ class Chapter5FightScene(UITemplateScene):
                 menu = ArrowMenu(menu_options)
                 while True:
                     # Draw UI
-                    art = load_art("battle_placeholder.txt")
+                    sel = menu.selected
+                    if sel < len(actions):
+                        action_name = actions[sel][0]
+                        art_file = action_art_map.get(action_name, "battle_placeholder.txt")
+                    else:
+                        art_file = "char_magic1.txt" if spell_actions else "battle_placeholder.txt"
+                    art = load_art(art_file)
                     art_lines = art.split('\n')
                     art_pad_top = max(0, (main_h - len(art_lines)) // 2)
                     main_box = []
                     main_box.append('┌' + '─' * main_w + '┐' + ' ' + '┌' + '─' * side_w + '┐')
                     for i in range(main_h):
                         if art_pad_top <= i < art_pad_top + len(art_lines):
-                            art_line = art_lines[i - art_pad_top].center(main_w)
+                            art_line = art_lines[i - art_pad_top].ljust(main_w)
                         else:
                             art_line = ' ' * main_w
                         # Side box: show player class, stats, and spells
@@ -174,15 +219,17 @@ class Chapter5FightScene(UITemplateScene):
                     # Spell menu
                     spell_menu = ArrowMenu([s[0] for s in spell_actions])
                     while True:
-                        # Draw spell menu
-                        art = load_art("battle_placeholder.txt")
+                        spell_sel = spell_menu.selected
+                        spell_name = spell_actions[spell_sel][0]
+                        art_file = spell_art_map.get(spell_name, "char_magic1.txt")
+                        art = load_art(art_file)
                         art_lines = art.split('\n')
                         art_pad_top = max(0, (main_h - len(art_lines)) // 2)
                         main_box = []
                         main_box.append('┌' + '─' * main_w + '┐' + ' ' + '┌' + '─' * side_w + '┐')
                         for i in range(main_h):
                             if art_pad_top <= i < art_pad_top + len(art_lines):
-                                art_line = art_lines[i - art_pad_top].center(main_w)
+                                art_line = art_lines[i - art_pad_top].ljust(main_w)
                             else:
                                 art_line = ' ' * main_w
                             # Side box: show player class, stats, and spells
@@ -239,19 +286,21 @@ class Chapter5FightScene(UITemplateScene):
                 if action_name == "Analyze Weakness":
                     mind = self.player.stats.get("Mind", 0)
                     analyze_weakness_buff = mind
+                    effect_art = action_effect_art_map.get(action_name, "battle_placeholder.txt")
                     self.draw_battle_ui([], [
                         "You use your keen mind to take a moment and see this Champion's weakness",
                         f"Your next attack will deal added +{mind} damage"
-                    ], plyr_hp, champ_hp)
+                    ], plyr_hp, champ_hp, art_file=effect_art)
                     self.wait_for_key("")
                     damage = 0
                 elif action_name == "Spirit Shield":
                     soul = self.player.stats.get("Soul", 0)
                     player_defense = soul
+                    effect_art = action_effect_art_map.get(action_name, "battle_placeholder.txt")
                     self.draw_battle_ui([], [
                         "You tap into your soul to conjure a shield around you",
                         f"You gain +{soul} of Defense against the next attack!"
-                    ], plyr_hp, champ_hp)
+                    ], plyr_hp, champ_hp, art_file=effect_art)
                     self.wait_for_key("")
                     damage = 0
                 # Explorer
@@ -259,35 +308,39 @@ class Chapter5FightScene(UITemplateScene):
                     body = self.player.stats.get("Body", 0)
                     soul = self.player.stats.get("Soul", 0)
                     damage = body + soul
+                    effect_art = action_effect_art_map.get(action_name, "battle_placeholder.txt")
                     self.draw_battle_ui([], [
                         "You leap like a cat and land on the Champion!",
                         f"He takes {damage} damage!"
-                    ], plyr_hp, champ_hp)
+                    ], plyr_hp, champ_hp, art_file=effect_art)
                     self.wait_for_key("")
                     champ_hp -= damage
                 elif action_name == "Tackle":
                     body = self.player.stats.get("Body", 0)
                     damage = body
+                    effect_art = action_effect_art_map.get(action_name, "battle_placeholder.txt")
                     self.draw_battle_ui([], [
                         "A classic tackle!",
                         f"The Champion takes {damage} damage!"
-                    ], plyr_hp, champ_hp)
+                    ], plyr_hp, champ_hp, art_file=effect_art)
                     self.wait_for_key("")
                     champ_hp -= damage + analyze_weakness_buff
                     if analyze_weakness_buff:
+                        effect_art = action_effect_art_map.get(action_name, "battle_placeholder.txt")
                         self.draw_battle_ui([], [
                             f"Your Analyze Weakness bonus adds +{analyze_weakness_buff} damage!"
-                        ], plyr_hp, champ_hp)
+                        ], plyr_hp, champ_hp, art_file=effect_art)
                         self.wait_for_key("")
                         analyze_weakness_buff = 0
                 # Seer
                 elif action_name == "Premonition":
                     soul = self.player.stats.get("Soul", 0)
                     premonition_debuff = soul
+                    effect_art = action_effect_art_map.get(action_name, "battle_placeholder.txt")
                     self.draw_battle_ui([], [
                         "You see into the future and know exactly what's going to happen!",
                         f"The champion gets a -{soul} to his next move."
-                    ], plyr_hp, champ_hp)
+                    ], plyr_hp, champ_hp, art_file=effect_art)
                     self.wait_for_key("")
                     damage = 0
                 # --- SPELLS LOGIC ---
@@ -296,59 +349,65 @@ class Chapter5FightScene(UITemplateScene):
                     # Broom Charm
                     if action_name == "Broom Charm":
                         damage = 1 + soul
+                        effect_art = spell_effect_art_map.get(action_name, "char_magic1.txt")
                         if analyze_weakness_buff:
                             damage += analyze_weakness_buff
                             analyze_weakness_buff = 0
                         self.draw_battle_ui([], [
                             "The broom you used to come here comes alive again.",
                             f"It goes brushing the Champion for {damage} damage!"
-                        ], plyr_hp, champ_hp)
+                        ], plyr_hp, champ_hp, art_file=effect_art)
                         self.wait_for_key("")
                         champ_hp -= damage
                     # Feather Spell
                     elif action_name == "Feather Spell":
                         feather_stun = 1
+                        effect_art = spell_effect_art_map.get(action_name, "char_magic1.txt")
                         self.draw_battle_ui([], [
                             "A little feather tickles the opponent!",
                             "It can't move for this round."
-                        ], plyr_hp, champ_hp)
+                        ], plyr_hp, champ_hp, art_file=effect_art)
                         self.wait_for_key("")
                     # Tickle Spell
                     elif action_name == "Tickle Spell":
                         tickle_stun = 2
+                        effect_art = spell_effect_art_map.get(action_name, "char_magic1.txt")
                         self.draw_battle_ui([], [
                             "The Champion starts to laugh uncontrollably!",
                             "He will take 2 turns to recover."
-                        ], plyr_hp, champ_hp)
+                        ], plyr_hp, champ_hp, art_file=effect_art)
                         self.wait_for_key("")
                     # Liar Liar, Pants on Fire
                     elif action_name == "Liar Liar":
                         damage = 2 + soul
+                        effect_art = spell_effect_art_map.get(action_name, "char_magic1.txt")
                         if analyze_weakness_buff:
                             damage += analyze_weakness_buff
                             analyze_weakness_buff = 0
                         self.draw_battle_ui([], [
                             "You lied to us all! How can you be the Champion?",
                             f"Fire comes up from his pants for {damage} damage!"
-                        ], plyr_hp, champ_hp)
+                        ], plyr_hp, champ_hp, art_file=effect_art)
                         self.wait_for_key("")
                         champ_hp -= damage
                     # Black Cat
                     elif action_name == "Black Cat":
                         damage = 3 + soul
+                        effect_art = spell_effect_art_map.get(action_name, "char_magic1.txt")
                         self.draw_battle_ui([], [
                             "A ghostly black cat appears and starts scratching the Champion's face!",
                             f"Ouch! He takes {damage} damage!"
-                        ], plyr_hp, champ_hp)
+                        ], plyr_hp, champ_hp, art_file=effect_art)
                         self.wait_for_key("")
                         champ_hp -= damage
                     # Liars Liars, Pants on Fire
                     elif action_name == "Liars Liars":
                         damage = 4 + soul
+                        effect_art = spell_effect_art_map.get(action_name, "char_magic1.txt")
                         self.draw_battle_ui([], [
                             "Do you smell something burning? Oh, it's the Champion and the fake Queen!",
                             f"Both of their pants are on fire as they take {damage} damage!"
-                        ], plyr_hp, champ_hp)
+                        ], plyr_hp, champ_hp, art_file=effect_art)
                         self.wait_for_key("")
                         champ_hp -= damage
                 # Default: if not handled, do nothing
@@ -356,71 +415,78 @@ class Chapter5FightScene(UITemplateScene):
                     damage = 0
 
                 if champ_hp <= 0:
+                    effect_art = champion_effect_art_map.get("Defeat", "battle_placeholder.txt")
                     self.draw_battle_ui([], [
                         "The Champion is defeated!",
                         "You win the battle!"
-                    ], plyr_hp, champ_hp)
+                    ], plyr_hp, champ_hp, art_file=effect_art)
                     self.wait_for_key("")
                     return  # Move on to next scene
                 # --- CHAMPION TURN ---
                 # Handle stuns
                 if feather_stun > 0:
+                    effect_art = champion_effect_art_map.get("Feather Stun", "battle_placeholder.txt")
                     self.draw_battle_ui([], [
                         "The Champion is tickled by a feather and can't move this round!"
-                    ], plyr_hp, champ_hp)
+                    ], plyr_hp, champ_hp, art_file=effect_art)
                     self.wait_for_key("")
                     feather_stun -= 1
                     continue
                 if tickle_stun > 0:
+                    effect_art = champion_effect_art_map.get("Tickle Stun", "battle_placeholder.txt")
                     self.draw_battle_ui([], [
                         "The Champion is still laughing and can't move this round!"
-                    ], plyr_hp, champ_hp)
+                    ], plyr_hp, champ_hp, art_file=effect_art)
                     self.wait_for_key("")
                     tickle_stun -= 1
                     continue
                 # Champion's turn: Tackle, Heal, or Smug
                 champ_action = random.choice(["Tackle"]*2 + ["Heal", "Smug"])
                 if champ_action == "Tackle":
+                    effect_art = champion_effect_art_map.get("Tackle", "battle_placeholder.txt")
                     champ_attack = 3 + champion_smug_buff
                     if premonition_debuff:
                         champ_attack = max(0, champ_attack - premonition_debuff)
                         self.draw_battle_ui([], [
                             f"Your Premonition reduces the Champion's attack by {premonition_debuff}!"
-                        ], plyr_hp, champ_hp)
+                        ], plyr_hp, champ_hp, art_file=effect_art)
                         self.wait_for_key("")
                         premonition_debuff = 0
                     if player_defense:
                         champ_attack = max(0, champ_attack - player_defense)
                         self.draw_battle_ui([], [
                             f"Your Spirit Shield blocks {player_defense} damage!"
-                        ], plyr_hp, champ_hp)
+                        ], plyr_hp, champ_hp, art_file=effect_art)
                         self.wait_for_key("")
                         player_defense = 0
                     self.draw_battle_ui([], [
                         "The Champion uses Tackle!",
                         f"You lose {champ_attack} HP!"
-                    ], plyr_hp, champ_hp)
+                    ], plyr_hp, champ_hp, art_file=effect_art)
                     self.wait_for_key("")
                     plyr_hp -= champ_attack
                     champion_smug_buff = 0
                 elif champ_action == "Heal":
+                    effect_art = champion_effect_art_map.get("Heal", "battle_placeholder.txt")
                     self.draw_battle_ui([], [
                         "The Champion uses Heal!",
                         "He regains 2 HP!"
-                    ], plyr_hp, champ_hp)
+                    ], plyr_hp, champ_hp, art_file=effect_art)
                     self.wait_for_key("")
                     champ_hp += 2
                 elif champ_action == "Smug":
+                    effect_art = champion_effect_art_map.get("Smug", "battle_placeholder.txt")
                     self.draw_battle_ui([], [
                         "The Champion looks smug...",
                         "His next Tackle will be stronger!"
-                    ], plyr_hp, champ_hp)
+                    ], plyr_hp, champ_hp, art_file=effect_art)
                     self.wait_for_key("")
                     champion_smug_buff += 1
                 if plyr_hp <= 0:
+                    effect_art = champion_effect_art_map.get("Faint", "battle_placeholder.txt")
                     self.draw_battle_ui([], [
                         "Oh no! You fainted!",
                         "Press ENTER to try again."
-                    ], plyr_hp, champ_hp)
+                    ], plyr_hp, champ_hp, art_file=effect_art)
                     self.wait_for_key("")
                     break  # Restart battle loop

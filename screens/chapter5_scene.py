@@ -9,11 +9,11 @@ class Chapter5Scene(UITemplateScene):
         # Lines from chapter5.md (one per line, as in the file)
         lines = [
             "Down below, Bo'ness was still bursting with Fair Day fun!",
-            "Pipers played and crowds cheered, singing a happy song called 'Festal Day.'",
+            "Pipers played and crowds cheered, singing happily.",
             "'Hurry!', she said. They had no idea their town was in danger!",
             "You and the Queen flew closer and closer to the Town Hall.",
+            "You arrived just as the pretend Queen's Champion was delivering its speech:",
             "",
-            "You arrived just as the pretend Queen's Champion was delivering its speech,",
             "'If anyone here, shall deny the Queen's title to the throne,", 
             "I am here ready to defend it, in single combat.'",
             "",
@@ -28,15 +28,20 @@ class Chapter5Scene(UITemplateScene):
             "Oh my, what a hullabaloo! The pretend Queen shrieked and leaped at the real Queen,",
             "a shiny dagger in her hand! And the Champion charged right at you!",
             "",
-            "FIGHT"
+            "This is it! Now it's your time to fight the Champion!",
+            "You'll see yours and the Champion's HP on the side.",
+            "You can use actions based on your character or your learned spells",
+            "Good Luck!"
         ]
         idx = 0
         # Placeholder for art files to cycle through (add your images here)
         art_files = [
-            'chapter5_1.txt',
-            'chapter5_2.txt',
-            'chapter5_3.txt',
-            'chapter5_4.txt',
+            'walking5.txt',
+            'champion2.txt',
+            'queen6.txt',
+            'queen7.txt',
+            'crowning1.txt',
+            'char_idle5.txt',
         ]
         main_w = 70
         main_h = 22

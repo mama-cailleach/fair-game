@@ -21,7 +21,7 @@ class IntroSceneUI(UITemplateScene):
         art_files = [
             'walking3.txt',
             'queen1.txt',
-            'walking4.txt'
+            'boness1.txt'
         ]
         while idx < len(lines):
             # Show up to 3 lines at a time

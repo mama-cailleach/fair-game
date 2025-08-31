@@ -38,11 +38,32 @@ class Chapter4KnightBattleScene(UITemplateScene):
         outcome = getattr(self.player, 'soul_ritual_outcome', 1)
         spell_names = spell_data.get(outcome, spell_data[1])
         menu = ArrowMenu(spell_names)
-        art_files = ["spell_placeholder.txt"] * len(spell_names)
+        # Map spell names to their corresponding art files (same as postritual scene)
+        spell_art_map = {
+            "Broom Charm": "char_magic_broom.txt",
+            "Feather Spell": "char_magic_feather.txt",
+            "Tickle Spell": "char_magic_tickle.txt",
+            "Black Cat": "char_magic_cat.txt",
+            "Liar Liar": "char_magic_liar.txt",
+            "Liars Liars": "char_magic_liars.txt"
+        }
+        art_files = [spell_art_map.get(name, "spell_placeholder.txt") for name in spell_names]
+        # Art to show when a spell is used (after enter)
+        spell_use_art_map = {
+            "Broom Charm": "char_knee1.txt", 
+            "Feather Spell": "knight5.txt",
+            "Tickle Spell": "knight4.txt",
+            "Black Cat": "cat1.txt",
+            "Liar Liar": "char_knee1.txt",
+            "Liars Liars": "char_knee1.txt"
+        }
         # Dialogue outcomes for each spell
         spell_dialogue = {
             "Broom Charm": [
-                "Hmm is not time to use this right now",
+                "",
+                "You can't see any brooms around.",
+                "Mebbe it's not the best idea right now.",
+                "",
                 "[GO BACK TO THE MENU]"
             ],
             "Feather Spell": [
@@ -66,17 +87,23 @@ class Chapter4KnightBattleScene(UITemplateScene):
                 "[MOVE ON TO NEXT SCENE]"
             ],
             "Liar Liar": [
-                "Hmm is not time to use this right now",
+                "",
+                "Hmm there's no liar here.",
+                "And no pants to catch on fire.",
+                "",
                 "[GO BACK TO THE MENU]"
             ],
             "Liars Liars": [
-                "Hmm is not time to use this right now",
+                "",
+                "Hmm there's no liars here.",
+                "And no pants to catch on fire.",
+                "",
                 "[GO BACK TO THE MENU]"
             ]
         }
         while True:
             sel = menu.selected
-            # Show art for selected spell
+            # Show art for selected spell (hover)
             art_file = art_files[sel]
             art = load_art(art_file)
             art_lines = art.split('\n')
@@ -85,7 +112,7 @@ class Chapter4KnightBattleScene(UITemplateScene):
             art_pad_top = max(0, (main_h - len(art_lines)) // 2)
             for i in range(main_h):
                 if art_pad_top <= i < art_pad_top + len(art_lines):
-                    art_line = art_lines[i - art_pad_top].center(main_w)
+                    art_line = art_lines[i - art_pad_top].ljust(main_w)
                 else:
                     art_line = ' ' * main_w
                 if i == 2:
@@ -121,10 +148,32 @@ class Chapter4KnightBattleScene(UITemplateScene):
                 dialogue = spell_dialogue.get(spell, ["Nothing happens."])
                 # Remove bracketed action lines for display, but keep for logic
                 display_lines = [d for d in dialogue if not (d.startswith('[') and d.endswith(']'))]
-                # Show up to 4 lines at once, then > Next
+                # Show spell use art (different from hover art if desired)
+                use_art_file = spell_use_art_map.get(spell, art_file)
+                use_art = load_art(use_art_file)
+                use_art_lines = use_art.split('\n')
+                use_art_pad_top = max(0, (main_h - len(use_art_lines)) // 2)
                 idx2 = 0
                 while idx2 < len(display_lines):
-                    main_box2 = main_box.copy()
+                    main_box2 = []
+                    main_box2.append('┌' + '─' * main_w + '┐' + ' ' + '┌' + '─' * side_w + '┐')
+                    for i in range(main_h):
+                        if use_art_pad_top <= i < use_art_pad_top + len(use_art_lines):
+                            art_line = use_art_lines[i - use_art_pad_top].center(main_w)
+                        else:
+                            art_line = ' ' * main_w
+                        if i == 2:
+                            side_line = self.player.char_class.center(side_w)
+                        elif i == 5:
+                            side_line = self.player.attr_labels[0].center(side_w)
+                        elif i == 6:
+                            side_line = self.player.attr_labels[1].center(side_w)
+                        elif i == 7:
+                            side_line = self.player.attr_labels[2].center(side_w)
+                        else:
+                            side_line = ' ' * side_w
+                        main_box2.append('│' + art_line + '│' + ' ' + '│' + side_line + '│')
+                    main_box2.append('└' + '─' * main_w + '┘' + ' ' + '└' + '─' * side_w + '┘')
                     text_box2 = []
                     text_box2.append('┌' + '─' * (main_w + side_w + 3) + '┐')
                     for j in range(4):

@@ -10,7 +10,7 @@ class Chapter5PostFightScene(UITemplateScene):
         lines = [
             "Two fights broke out! The true Queen, surprisingly speedy, bravely fought the imposter.",
             "And you, with your clever witchy magic, were too much for the big Champion!",
-            "Both bad guys were quickly defeated! Just then, the Witches of Bo'ness,",
+            "Both baddies were quickly defeated! Just then, the Witches of Bo'ness,",
             "who had been dancing nearby, did a special spell.",
             "Swirly magic surrounded the pretend Queen, and poof!",
             "Her disguise faded, showing she was really the mean Princess of Linlithgow!",
@@ -18,15 +18,14 @@ class Chapter5PostFightScene(UITemplateScene):
             "scrambled away, running into the crowd and disappearing.",
             "",
             "The real Queen watched them go, her eyes steady.",
-            "'Let them run. They'll try again, but they'll never, ever take our town!'"
+            "'One thing remains and will not die - oor fair it changes never.'"
         ]
         idx = 0
         # Placeholder for art files to cycle through (add your images here)
         art_files = [
-            'chapter5_1.txt',
-            'chapter5_2.txt',
-            'chapter5_3.txt',
-            'chapter5_4.txt',
+            'witches11.txt',
+            'princess1.txt',
+            'queen8.txt'
         ]
         main_w = 70
         main_h = 22

@@ -10,25 +10,28 @@ class Chapter4PostStoneScene(UITemplateScene):
         lines = [
             "",
             "Feeling brave, you went back to the spooky Carriden House.",
-            "> GO IN",
             "",
+            "> GO IN <",
             "",
             "Deep inside the spooky house, you find the giant, heavy door.",
             "You hear a tiny, muffled sound from inside. A soft cry",
             "It's the Queen tied up!",
             "",
-            "You the ghostly knight finds you again, but this time, you are ready!",
+            "The ghostly knight finds you again, but this time, you are ready!",
             "You have your own clever magic that the ancient witches taught you.",
             "",
-            "[KNIGHT BATTLE]"
+            "",
+            "He doesn't seem to move away from the door.",
+            "You recall your freshly learned spells.",
+            "Surely one of them can be useful now!"
         ]
         idx = 0
         # Placeholder for art files to cycle through (add your images here)
         art_files = [
-            'chapter5_1.txt',
-            'chapter5_2.txt',
-            'chapter5_3.txt',
-            'chapter5_4.txt',
+            'door6.txt',
+            'door1.txt',
+            'knight1.txt',
+            'knight2.txt'
         ]
         main_w = 70
         main_h = 22
